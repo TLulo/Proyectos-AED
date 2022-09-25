@@ -107,8 +107,9 @@ encolar :: Persona -> Cola -> Cola
 encolar p (Encolada p' c) = (Encolada p' (Encolada p VaciaC))
 --3) 
 busca :: Cola -> Cargo -> Maybe Persona 
+busca VaciaC c = Nothing 
 busca (Encolada (Docente x) z) c |  c == x = Just (Docente x)  
-    | c /= x = Nothing 
+    | c /= x = busca z c 
 
 --8) 
 --a) 
