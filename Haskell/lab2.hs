@@ -141,6 +141,14 @@ la_concat :: ListaAsoc a b -> ListaAsoc a b -> ListaAsoc a b
 la_concat (Nodo x y z) Vacia = (Nodo x y Vacia)
 la_concat Vacia (Nodo x' y' z') = (Nodo x' y' Vacia)
 la_concat (Nodo x y z) (Nodo x' y' z') = (Nodo x y (la_concat z (Nodo x' y' z')))
+{-8.b.2 Comentado
+la_concat :: ListaAsoc a b -> ListaAsoc a b -> ListaAsoc a b
+
+la_concat Vacia Vacia = Vacia
+la_concat y Vacia = y
+la_concat Vacia x= x
+la_concat (Nodo a b x) (Nodo c d y) = (Nodo a b (la_concat x (Nodo c d y)))
+-}
 
 --3) 
 la_agregar :: ListaAsoc a b -> a -> b -> ListaAsoc a b 
