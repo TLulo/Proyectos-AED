@@ -105,7 +105,7 @@ atender (Encolada p c) = Just c
 --2) 
 encolar :: Persona -> Cola -> Cola 
 encolar p VaciaC = (Encolada p VaciaC)
-encolar p (Encolada p' c) = (Encolada p' (encolar p c))
+encolar p (Encolada p' c) = (Encolada p' (encolar p c))--encolar p (Encolada p' c) = (Encolada p' (encolada p c)) copie y pegue, donde solo modifique la ultima parte
 --3) 
 busca :: Cola -> Cargo -> Maybe Persona 
 busca VaciaC c = Nothing 
