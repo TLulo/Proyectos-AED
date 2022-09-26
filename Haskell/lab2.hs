@@ -104,7 +104,8 @@ atender (Encolada p VaciaC) = Nothing
 atender (Encolada p c) = Just c
 --2) 
 encolar :: Persona -> Cola -> Cola 
-encolar p (Encolada p' c) = (Encolada p' (Encolada p VaciaC))
+encolar p VaciaC = (Encolada p VaciaC)
+encolar p (Encolada p' c) = (Encolada p' (encolar p c))
 --3) 
 busca :: Cola -> Cargo -> Maybe Persona 
 busca VaciaC c = Nothing 
