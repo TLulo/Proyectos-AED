@@ -129,12 +129,12 @@ la_long (Nodo x y (z)) = 1 + la_long z
 la_concat :: ListaAsoc a b -> ListaAsoc a b -> ListaAsoc a b 
 la_concat (Nodo x y z) Vacia = (Nodo x y Vacia)
 la_concat Vacia (Nodo x' y' z') = (Nodo x' y' Vacia)
-la_concat (Nodo x y z) (Nodo x' y' z') = (Nodo x y (Nodo x' y' Vacia))
+la_concat (Nodo x y z) (Nodo x' y' z') = (Nodo x y (la_concat z (Nodo x' y' z')))
 
 --3) 
 la_agregar :: ListaAsoc a b -> a -> b -> ListaAsoc a b 
 la_agregar Vacia x' y' = (Nodo x' y' Vacia)  
-la_agregar (Nodo x y z)  x' y' = (Nodo x y (Nodo x' y' Vacia))
+la_agregar (Nodo x y z)  x' y' = (Nodo x y (la_agregar z x' y'))
 
 --4) 
 la_pares :: ListaAsoc a b -> [(a, b)]
