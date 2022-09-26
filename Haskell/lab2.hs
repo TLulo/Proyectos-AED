@@ -111,6 +111,16 @@ busca :: Cola -> Cargo -> Maybe Persona
 busca VaciaC c = Nothing 
 busca (Encolada (Docente x) z) c |  c == x = Just (Docente x)  
     | c /= x = busca z c 
+{-
+7.a.3 Comentado
+busca :: Cola -> Cargo -> Maybe Persona
+
+busca VaciaC w = Nothing
+busca (Encolada (Docente x) y) z
+    | x == z =Just (Docente x)
+    |otherwise = busca y z
+busca (Encolada _ y) z = busca y z
+-}
 
 --8) 
 --a) 
