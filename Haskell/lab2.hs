@@ -66,7 +66,8 @@ data Persona = Decane | Docente Cargo | NoDocente Area | Estudiante Carrera Ingr
 --c) 
 cuantos_doc :: [Persona] -> Cargo -> Int 
 cuantos_doc [] c = 0
-cuantos_doc (x:xs) c = length (filter (Docente c==) xs)
+cuantos_doc (x:xs) c = length (filter (Docente c==) xs)+1
+--Aca esta el edit que te decia, es solo el +1
 
 --5)
 --a) 
