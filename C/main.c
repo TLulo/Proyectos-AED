@@ -1,3 +1,7 @@
+/*
+LAS FUNCIONES ESTAN PUESTAS PARA COMPILARLAS UNA A UNA.
+Ejercicio 1
+*/
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -27,6 +31,7 @@ int main(void)
     printf("El resultado de la tercera ecuacion es: %d\n",resc);
     printf("El resultado de la cuarta ecuacion es: %d\n",d);
     printf("El resultado de la quinta ecuacion es: %d\n",rese);    
-
-
 }
+/*
+Ejercicio 2
+*/
