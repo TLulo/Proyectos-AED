@@ -2,9 +2,9 @@
 
 int x,y,z,m,rese,bucle;
 
-int funb1(int x, int y,  int z, int m){
+int funb1(int x, int y, int m){
     if (x<y){
-        m = z;
+        m = x;
     }else{
         m = y;
     }
@@ -54,7 +54,7 @@ int main(void){
         printf("El resultado de la funcion 1 es: %d\n",rese);
     }
     else if (bucle == 2){
-        m = funb1(x,y,z,m);
+        m = funb1(x,y,m);
         m = funb2(z,m);
 
 
@@ -67,3 +67,6 @@ int main(void){
         printf("Inserte un valor valido.\n");
     }        
 }
+/*
+La funcion devuelve el menor entre x,y,z y lo almacena en m
+*/
