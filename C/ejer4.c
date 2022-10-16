@@ -70,3 +70,12 @@ int main(void){
 /*
 La funcion devuelve el menor entre x,y,z y lo almacena en m
 */
+int main(void){
+    int x,y;
+    if (x >= y){
+        x = 0;
+    }
+    else{
+        x = 2;
+    }
+    printf("el valro finaol es : %d",x);
