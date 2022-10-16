@@ -2,22 +2,19 @@
 
 int x,y,z,m,rese,bucle;
 
-int funb1(int x, int y, int m){
+int funb1(int x, int y, int m,int z){
     if (x<y){
         m = x;
     }else{
         m = y;
     }
-    return m;
-}
-
-int funb2(int z, int m){
     if (m<z){
-        return m;
+        m=m;
     }
     else{
-        return z;
+        m = z;
     }
+    return m;
 }
 
 int fune (int a,int b){
@@ -54,8 +51,7 @@ int main(void){
         printf("El resultado de la funcion 1 es: %d\n",rese);
     }
     else if (bucle == 2){
-        m = funb1(x,y,m);
-        m = funb2(z,m);
+        m = funb1(x,y,m,z);
 
 
         printf("el estado final de m es: %d\n",m);
