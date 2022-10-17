@@ -1,20 +1,23 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-int m;
+bool m;
+int temp; 
 int pedirBool(void)
 {
     printf("Ingrese Bool: \n");
-    scanf("%d", &m);
-    return m;
+    scanf("%d", &temp);
+    m = temp;
+    return temp;
 }
 
 void imprimeBool(bool x)
 {
-printf("Bool: %d", x);
+if (x)
+{printf("true");}
+else{printf("false");}
 }
 int main(void)
-{
-m = pedirBool();
-imprimeBool(m);
+{;
+imprimeBool(pedirBool());
 }
