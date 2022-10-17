@@ -46,4 +46,6 @@ El resultado de la segunda ecuacion es: 499
 El resultado de la tercera ecuacion es: 0
 El resultado de la cuarta ecuacion es: 5
 El resultado de la quinta ecuacion es: 0
+-----------------------------------
+La expresion e, es de tipo Booleano.
 */
