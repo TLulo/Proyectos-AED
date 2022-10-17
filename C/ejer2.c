@@ -32,5 +32,5 @@ x=4     y=-4    z=8      b=0    w=5
 */
     funa = x % 4 == 0;
     funb = x + y == 0 && y - x == (-1) * z;
-    func = !b  && w;
+    func = !b  && w; // tiene que dar false. Con b = 0 w = 5 da true 
 }
