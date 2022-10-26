@@ -62,3 +62,40 @@ int main(void){
     printf("Los intercambios son:\n");
     intercambio(x,y,z);
 }
+
+
+//----------------------------------- ASI LO RESUELVE AL 1 B UN GIGACHAD DE VERDAD ----------------------------------------------------------
+#include<stdio.h>
+#include<assert.h>
+
+
+int pedirEntero(void){
+    int i;
+    assert (i>0 || i< 0);
+    printf("Introduzca el numero:\n");
+    scanf("%d",&i);
+    return i;
+}
+
+int imprimeEntero(int x){
+    printf("El numero es: %d\n",x);
+}
+
+int minimo (int a, int b) {
+    int res;
+    if (a > b) {
+        res = b;
+    } else {
+        res = a;
+    }    
+    return res;
+}
+
+int main(void) {
+    int x,y,min;
+    x = pedirEntero();
+    y = pedirEntero();
+    min= minimo(x,y);
+    printf("El minimo entre %d y %d es %d", x, y, min);
+    assert (min>0 || min< 0);
+}
