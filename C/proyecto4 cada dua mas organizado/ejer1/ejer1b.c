@@ -1,6 +1,6 @@
 // FUncion lulo Asserts puestos
 #include <stdio.h>
-#include <asssert.h>
+#include <assert.h>
 
 int x, y, z, min, absoluto;
 
