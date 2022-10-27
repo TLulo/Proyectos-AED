@@ -1,4 +1,6 @@
+// FUncion lulo Asserts puestos
 #include <stdio.h>
+#include <asssert.h>
 
 int x, y, z, min, absoluto;
 
@@ -14,6 +16,7 @@ void imprimeEntero(int x,char let){
 }
 
 int minimo(int a, int b){
+    assert(a == x && b == y);
     int res;
     if (a <= b){
         res = a;
@@ -21,10 +24,12 @@ int minimo(int a, int b){
     else if (a > b){
         res = b;
     }
+    assert(res == x || res == y);
     return res; 
 }
 
 int valor_Absoluto(int a){
+    assert(a == x);
     int res;
     if (a >= 0){
         res = a;
@@ -32,17 +37,21 @@ int valor_Absoluto(int a){
     else if (a < 0){
         res = -a;
     }
+    assert(res == x || res == -x);
     return res;
 }
 
 void intercambio(int a, int b,int c){
+    assert(a == x && b == y && c == z);
     int aAux,bAux,cAux;
     aAux= a;
     bAux = b;
     cAux = c;
+    assert(aAux == x && bAux == y && cAux = z);
     a= bAux;
     b = cAux;
     c = aAux;
+    assert(a == y && b == z && c == x);
     imprimeEntero(a,'x');
     imprimeEntero(b,'y');
     imprimeEntero(c,'z');
