@@ -72,13 +72,13 @@ int main(void){
 int pedirEntero(void){
     int i;
     assert (i>0 || i< 0);
-    printf("Introduzca el numero:\n");
+    printf("Introduzca el numero:");
     scanf("%d",&i);
     return i;
 }
 
-int imprimeEntero(int x){
-    printf("El numero es: %d\n",x);
+int imprimeEntero(int x, char let){
+    printf("El valor de %c es: %d\n",let,x);
 }
 
 int minimo (int a, int b) {
@@ -91,11 +91,42 @@ int minimo (int a, int b) {
     return res;
 }
 
+int valorAbsoluto(int a) {
+    int res;
+    if (a >= 0) {
+        res = a;
+    } else {
+        res = (-1)* a;
+    }
+    return res;
+}
+
+int intercambioVar(int a, int b, int c) {
+    int auxA, auxB, auxC;
+    auxA= a;
+    auxB = b;
+    auxC = c;
+    a= auxB;
+    b = auxC;
+    c = auxA;
+    printf("El intercambio de variables es el siguiente;\n");
+    imprimeEntero(a,'x');
+    imprimeEntero(b,'y');
+    imprimeEntero(c,'z');
+}
+
 int main(void) {
-    int x,y,min;
+    int x,y,z,min,absoluto;
+    printf("Introduzca los dos enteros a comparar para obtener el minimo a continuacion: \n");
     x = pedirEntero();
     y = pedirEntero();
+    printf("Introduzca el entero para obtener su valor absoluto: \n");
+    z = pedirEntero();
+    absoluto = valorAbsoluto(z);
     min= minimo(x,y);
-    printf("El minimo entre %d y %d es %d", x, y, min);
+    printf("El minimo entre %d y %d es %d\n", x, y, min);
+    absoluto = valorAbsoluto(z);
+    printf("El valor absoluto de %d es: %d\n", z, absoluto);
+    intercambioVar(x , y ,z);
     assert (min>0 || min< 0);
 }
