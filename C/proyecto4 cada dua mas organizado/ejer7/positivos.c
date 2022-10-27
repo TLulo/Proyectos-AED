@@ -91,18 +91,16 @@ int main(void){
 #include <stdio.h>
 #include<stdbool.h>
 
-void imprimeBooleano(bool x){
-    if (x){
-        printf("El resultado de la funcion es True\n");
-    }
-    else{
-        printf("El resultado de la funcion es False\n");
-    }
+int pedirLargo(void){
+    int i;
+    printf("Introduzca el largo del arreglo:\n");
+    scanf("%d",&i);
+    return i;
 }
 
 int pedirEntero(void){
     int i;
-    printf("Introduzca el largo del arreglo:\n");
+    printf("Introduzca un numero:\n");
     scanf("%d",&i);
     return i;
 }
@@ -152,13 +150,27 @@ bool todos_positivos(int a[], int tam) {
 }
 
 int main (void) {
-    int n,sum,bool1,bool2;
-    n = pedirEntero();
+    int n,sum,bool1,bool2,menu;
+    n = pedirLargo();
     int a[n];
     pedirArreglo(a,n);
     imprimeArreglo(a,n);
     bool1 = existe_positivo(a,n);
     bool2 = todos_positivos(a,n);
-    printf("Todo el arreglo contiene algun numero positivo: %s \n", (bool1)?"True":"False");
-    printf("Todo el arreglo contiene numeros positivos: %s \n", (bool2)?"True":"False");
+    printf("%s", bool1? "true":"false\n");
+    printf("%s", bool2? "true":"false\n");
+    menu = 1;
+    while (menu != 0) {
+        printf("Ingrese 1 si desea ver si todos los elementos del arreglo que introdujo son positivos\nIngrese 2 si desea ver si algun elemento del arreglo es positivo\nIngrese 0 si desea cerrar el menu\n");
+        menu = pedirEntero();
+    if (menu == 1) {
+        printf("El arreglo contiene todos numeros positivos (True si es asi, False si no es asi): %s\n", bool2?"True":"False");
+    }else if (menu == 2) {
+        printf("El arreglo contiene almenos un elemento positivo (True si es asi, False si no es asi): %s\n", bool2?"True":"False");
+    }else if (menu == 0) {
+        printf("El programa finalizo\n");
+    } else {
+        printf("Ingrese un valor valido\n");
+    } 
+}
 }
