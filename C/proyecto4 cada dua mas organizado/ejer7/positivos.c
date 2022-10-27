@@ -84,3 +84,81 @@ int main(void){
     pedirArreglo(a,n);
     menu(a,n);
 }
+
+
+//-------------------------------------FLACO TENES UNA ADICCION A LOS MENUS DEJA DE METER MENU HASTA EN LA SOPA------------------------------
+
+#include <stdio.h>
+#include<stdbool.h>
+
+void imprimeBooleano(bool x){
+    if (x){
+        printf("El resultado de la funcion es True\n");
+    }
+    else{
+        printf("El resultado de la funcion es False\n");
+    }
+}
+
+int pedirEntero(void){
+    int i;
+    printf("Introduzca el largo del arreglo:\n");
+    scanf("%d",&i);
+    return i;
+}
+
+void pedirArreglo(int a[], int n_max) {
+    int i;
+    i = 0;
+    while (i < n_max) {
+        printf("Ingrese el valor del arreglo en la posicion %d:", i);
+        scanf("%d",&a[i]);
+        i=i+1;
+    }
+}
+
+void imprimeArreglo(int a[], int n_max){
+    int i;
+    i=0;
+    while(i < n_max) {
+        printf("El numero %d esta en la posicion %d;\n", a[i],i);
+        i = i+1;
+    }
+}
+
+bool existe_positivo(int a[], int tam) {
+    int i;
+    i = 0;
+    while (i < tam) {
+        if (a[i] > 0) {
+            return 1;
+        } else{
+            i=i+1;
+        }
+    }
+    return 0;
+}
+
+bool todos_positivos(int a[], int tam) {
+    int i;
+    i = 0;
+    while (i < tam) {
+        if (a[i] > 0) {
+            i = i + 1;
+        } else{
+            return 0;
+        }
+    }
+}
+
+int main (void) {
+    int n,sum,bool1,bool2;
+    n = pedirEntero();
+    int a[n];
+    pedirArreglo(a,n);
+    imprimeArreglo(a,n);
+    bool1 = existe_positivo(a,n);
+    bool2 = todos_positivos(a,n);
+    printf("Todo el arreglo contiene algun numero positivo: %s \n", (bool1)?"True":"False");
+    printf("Todo el arreglo contiene numeros positivos: %s \n", (bool2)?"True":"False");
+}
