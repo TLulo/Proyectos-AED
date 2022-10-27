@@ -128,7 +128,7 @@ bool existe_positivo(int a[], int tam) {
     int i;
     i = 0;
     while (i < tam) {
-        if (a[i] > 0) {
+        if (a[i] >= 0) {
             return 1;
         } else{
             i=i+1;
@@ -157,8 +157,8 @@ int main (void) {
     imprimeArreglo(a,n);
     bool1 = existe_positivo(a,n);
     bool2 = todos_positivos(a,n);
-    printf("%s", bool1? "true":"false\n");
-    printf("%s", bool2? "true":"false\n");
+    printf("%s", bool1? "True":"False\n");
+    printf("%s", bool2? "True":"False\n");
     menu = 1;
     while (menu != 0) {
         printf("Ingrese 1 si desea ver si todos los elementos del arreglo que introdujo son positivos\nIngrese 2 si desea ver si algun elemento del arreglo es positivo\nIngrese 0 si desea cerrar el menu\n");
@@ -166,7 +166,7 @@ int main (void) {
     if (menu == 1) {
         printf("El arreglo contiene todos numeros positivos (True si es asi, False si no es asi): %s\n", bool2?"True":"False");
     }else if (menu == 2) {
-        printf("El arreglo contiene almenos un elemento positivo (True si es asi, False si no es asi): %s\n", bool2?"True":"False");
+        printf("El arreglo contiene almenos un elemento positivo (True si es asi, False si no es asi): %s\n", bool1?"True":"False");
     }else if (menu == 0) {
         printf("El programa finalizo\n");
     } else {
