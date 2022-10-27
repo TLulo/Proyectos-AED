@@ -30,3 +30,37 @@ int main(void){
     printf("La sumatoria es:\n");
     imprimeEntero(res,'S');
 }
+
+
+
+/*---------------------------------- ASI LO HICE YO--------------------------------------------- */
+
+#include<stdio.h>
+#include<assert.h>
+
+int pedirNatural(void){
+    int i;
+    assert (i > 0);
+    printf("Introduzca el numero:\n");
+    scanf("%d",&i);
+    return i;
+}
+
+int suma_hasta(int num) {
+  int i, res;
+  i = 0;
+  res = 0;
+  while(i < num ){
+    res = res + i;
+    i = i + 1;
+}   return res;
+}
+
+
+int main() {
+    int resultado, n;
+    n = pedirNatural();
+    
+    resultado = suma_hasta(n);
+    printf("La suma de los naturales hasta N sin incluir N es: %d \n", resultado);
+}
