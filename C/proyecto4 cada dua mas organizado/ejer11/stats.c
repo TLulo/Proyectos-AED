@@ -65,3 +65,65 @@ int main(void){
     pedirArreglo(a,n);
     imprimeEnteros(stats(a,n));
 }
+
+
+//-------------------------------COMIT------------------------------
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <limits.h>
+
+struct datos_t {
+float maximo;
+float minimo;
+float promedio;
+};
+
+struct datos_t stats(float a[], int tam){
+    float min,max,sum,prom;
+    int i;
+    struct datos_t stats;
+    stats.minimo = INT_MAX;
+    stats.maximo = INT_MIN;
+    sum=0;
+    while(i < tam) {
+        sum= a[i] + sum;
+        if (a[i] < stats.minimo) {
+            stats.minimo=a[i];
+        } else if (a[i] > stats.maximo){
+            stats.maximo=a[i];
+        }
+        i = i + 1;
+        }
+        stats.promedio = sum/tam;
+    
+    printf("Los stats son:\nMaximo:%f\nMinimo:%f\nPromedio:%f\n",stats.maximo,stats.minimo,stats.promedio);
+}
+
+void pedirArreglo(float a[],int n_max){
+    int i;
+    i = 0;
+    while (i < n_max){
+        printf("Ingrese el valor del arreglo en la posicion %d: ",i+1);
+        scanf("%f",&a[i]);
+        i=i+1;
+    }
+}
+
+int pedirEntero(void){
+    int a;
+    printf("Ingrese un valor:");
+    scanf("%d",&a);
+    return a;
+}
+    
+
+int main() {
+    int n;
+    n = pedirEntero();
+    float a[n];
+    pedirArreglo(a,n);
+    stats(a,n);
+
+    return 0;
+}
