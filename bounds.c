@@ -20,10 +20,16 @@ struct bound_data check_bound(int value, int arr[], unsigned int length) {
     res.exists = 0;
     int tam = length;
     while(i<=tam){
-      if(arr[i]<(value)){
+      if ((arr[i]==value)){
+        res.exists = 1;
         res.is_lowerbound = 1 && res.is_lowerbound;
-        res.is_upperbound = 0 && res.is_lowerbound;
-      }else if(arr[i]>(value)){
+        res.is_upperbound = 1 && res.is_upperbound;
+        res.where = i;
+      }
+      if((arr[i]>value)){
+        res.is_lowerbound = 1 && res.is_lowerbound;
+        res.is_upperbound = 0 && res.is_upperbound;
+      }else if((arr[i]<value)){
         res.is_upperbound = 1 && res.is_upperbound;
         res.is_lowerbound = 0 && res.is_lowerbound;
       } 
