@@ -15,23 +15,22 @@ struct bound_data check_bound(int value, int arr[], unsigned int length) {
     
     int i = 0;
     struct bound_data res;
-    res.is_lowerbound = 1;
-    res.is_upperbound = 1;
-    res.exists = 0;
+    res.is_lowerbound = true;
+    res.is_upperbound = true;
+    res.exists = false;
     int tam = length;
-    while(i<=tam){
+    while(i<tam){
       if ((arr[i]==value)){
-        res.exists = 1;
-        res.is_lowerbound = 1 && res.is_lowerbound;
-        res.is_upperbound = 1 && res.is_upperbound;
+        res.exists = true;
+        res.is_lowerbound = true && res.is_lowerbound;
+        res.is_upperbound = true && res.is_upperbound;
         res.where = i;
-      }
-      if((arr[i]>value)){
-        res.is_lowerbound = 1 && res.is_lowerbound;
-        res.is_upperbound = 0 && res.is_upperbound;
+      }else if((arr[i]>value)){
+        res.is_lowerbound = true && res.is_lowerbound;
+        res.is_upperbound = false && res.is_upperbound;
       }else if((arr[i]<value)){
-        res.is_upperbound = 1 && res.is_upperbound;
-        res.is_lowerbound = 0 && res.is_lowerbound;
+        res.is_upperbound = true && res.is_upperbound;
+        res.is_lowerbound = false && res.is_lowerbound;
       } 
       i = i + 1;
     }
@@ -60,6 +59,9 @@ void pedirArreglo(int a[], int n_max){
 }
 
 int main(void) {
+    
+    //Declaracion de variables y pedir al usuario los elementos del array
+    
     int value;
     printf("Ingrese un value:");
     scanf("%d",&value);
@@ -68,10 +70,25 @@ int main(void) {
     struct bound_data result; 
     result = check_bound(value, array, ARRAY_SIZE);
 
-    printf("%d\n", result.is_upperbound); 
-    printf("%d\n", result.is_lowerbound); 
-    printf("%d\n", result.exists);        
-    printf("%d\n", result.where);         
+    //Printea los resultados de la funcion check_bound
+
+    if (result.is_upperbound){
+        printf("El value es mayor o igual que todos los elementos del array\n");
+    }else {
+        printf("El value no es mayor o igual que todos los elementos del array\n");
+    } 
+    
+    if (result.is_lowerbound){
+        printf("El value es menor o igual que todos los elementos del array (%s)\n", (result.is_lowerbound)? "True": "False");
+    }else {
+        printf("El value no es menor o igual que todos los elementos del array\n");
+    }
+    
+    if (result.exists){
+        printf("El value es igual a un elemento del array, se halla en la posicion %d\n", result.where);
+    } else {
+        printf("El value no se halla en el arreglo\n");
+    }
 
     return EXIT_SUCCESS;
 }
