@@ -4,7 +4,8 @@
 
 #include <assert.h>  /* assert() */
 
-#define CELL_MAX (3 * 3 - 1) //Define la posicion maxima que podemos elegir para poner una X u O 
+#define n 4
+#define CELL_MAX (n * n - 1) //Define la posicion maxima que podemos elegir para poner una X u O 
 
 void print_sep(int length) //Imprime separadores
 {
@@ -14,55 +15,90 @@ void print_sep(int length) //Imprime separadores
 
 }
 
-void print_board(char board[3][3]) //Imprime el board
+void print_board(char board[n][n]) //Imprime el board
 {
     int cell = 0;
 
-    print_sep(3);
-    for (int row = 0; row < 3; ++row) {
-        for (int column = 0; column < 3; ++column) {
+    print_sep(n);
+    for (int row = 0; row < n; ++row) {
+        for (int column = 0; column < n; ++column) {
             printf("\t | %d: %c ", cell, board[row][column]);
             ++cell;
         }
         printf("\t | \n");
-        print_sep(3);
+        print_sep(n);
     }
 }
 
-char get_winner(char board[3][3])
+char get_winner(char board[n][n])
 {   
-    int i;
+    bool hor_winner,vert_winner,diag_winner,diags_winner;
+    int i,j;
+    int temp_i,temp_j;
+    char winner = '-';
     // Revisa horizontales
-    for(i = 0; i < 3; i++){
-        if(board[i][0] == board[i][1] && board[i][0] == board[i][2]){
-            return board[i][0];
+    for(i = 0; i < n; i++){
+        hor_winner = true;
+        for(int j = 0; j < n - 1; j++){
+            if((board[i][j] == board[i][j+1]) && board[i][j] != '-'){
+                    hor_winner = true && hor_winner;
+            } else {
+                    hor_winner = false && hor_winner;
+                }
+            }
+        if (hor_winner){
+            return board[i][i];
         }
     }
-    // Revisa verticales
-    for(i = 0; i < 3; i++){
-        if(board[0][i] == board[1][i] && board[0][i] == board[2][i]){
-            return board[0][i];
+    // Revisa vertical 
+    for(i = 0; i < n; i++){
+        vert_winner = true;
+        for(int j = 0; j < n - 1; j++){
+            if((board[j][i] == board[j+1][i]) && board[j][i] != '-'){
+                    vert_winner = true && vert_winner;
+            } else {
+                    vert_winner = false && vert_winner;
+                }
+            }
+        if (vert_winner){
+            return board[i][i];
         }
     }
     
-    // Revisa diagonales
-    if(board[0][0] == board[1][1] && board[1][1] == board[2][2]){
-            return board[0][0];
+    // Revisa diagonal principal
+    diag_winner = true;
+    for(i = 0; i < n-1; i++){
+        if((board[i][i] == board[i+1][i+1]) && board[i][i] != '-'){
+            diag_winner = true && diag_winner;
+        } else {
+            diag_winner = false && diag_winner;
+        }
+    } 
+    if (diag_winner){
+            return board[i][i];
     }
-    if(board[0][2] == board[1][2] && board[0][2] == board[2][0]){
-            return board[0][2];
-    }
-    
-    return '-';
+    // Revisa diagonal secundaria
+    diags_winner = true;
+    for((i = 0, j = n - 1); i < n-1;( i++ ,j--)){
+        if((board[i][j] == board[i+1][j-1]) && board[i][j] != '-'){
+            diags_winner = true && diags_winner;
+        } else {
+            diags_winner = false && diags_winner;
+        }
+    } 
+    if (diags_winner){
+            return board[0][n-1];
+}
+        return winner;
 }
 
-bool has_free_cell(char board[3][3])
+bool has_free_cell(char board[n][n])
 {
     bool free_cell=false;
     // Anidado de bucles para reccorrer las posiciones del board
-    for (int i = 0; i < 3 ; i++)
+    for (int i = 0; i < n ; i++)
     {
-        for (int j = 0; j < 3; j++)
+        for (int j = 0; j < n; j++)
             {
                 if(board[i][j] == '-') //Si hay un lugar libre devuelve true
                     {free_cell = true || free_cell;} 
@@ -73,15 +109,17 @@ bool has_free_cell(char board[3][3])
     return free_cell;
 }
 
+
 int main(void)
 {
     printf("TicTacToe Completisimo :)\n"); //Importante para saber que funciona
 
-    char board[3][3] = { // Definimos el board y le asignamos lugares vacios en todas las posiciones
-        { '-', '-', '-' },
-        { '-', '-', '-' },
-        { '-', '-', '-' }
-    };
+    char board[n][n];
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            board[i][j] = '-';
+    }
+    }
 
     char turn = 'X';
     char winner = '-';
@@ -96,8 +134,8 @@ int main(void)
             exit(EXIT_FAILURE);
         }
         if (cell >= 0 && cell <= CELL_MAX) {
-            int row = cell / 3;
-            int colum = cell % 3;
+            int row = cell / n;
+            int colum = cell % n;
             if (board[row][colum] == '-') {
                 board[row][colum] = turn;
                 turn = turn == 'X' ? 'O' : 'X';
