@@ -24,37 +24,20 @@ void print_help(char *program_name) {
            program_name);
 }
 
-char *parse_filepath(int argc, char *argv[]) {
-    /* Parse the filepath given by command line argument. */
-    char *result = NULL;
-    // Program takes exactly two arguments
-    // (the program's name itself and the input-filepath)
-    bool valid_args_count = (argc == 2);
-
-    if (!valid_args_count) {
-        print_help(argv[0]);
-        exit(EXIT_FAILURE);
-    }
-
-    result = argv[1];
-
-    return result;
-}
-
-unsigned int array_from_file(int array[],
-                             unsigned int max_size,
-                             const char *filepath) {
+unsigned int array_from_stdin(int array[],
+                             unsigned int max_size) {
     FILE*archivo;
-    archivo = fopen(filepath,"r");
-
-    fscanf(archivo , "%u", &max_size);
-
-    for (unsigned int i = 0u; i < max_size; ++i)
+    archivo = stdin;
+    printf("Largo del arreglo:");
+    fscanf(archivo,"%u", &max_size);
+    
+    for (unsigned int i = 0; i < max_size; ++i)
     {
+        printf("Ingrese el %d elemento del arreglo:", (i+1));
         fscanf(archivo , "%d" , &array[i]);
     }
 
-    fclose(archivo);
+    
     return max_size;
 }
 
@@ -69,17 +52,13 @@ void array_dump(int a[], unsigned int length) {
 }
 
 
-int main(int argc, char *argv[]) {
-    char *filepath = NULL;
-
-    /* parse the filepath given in command line arguments */
-    filepath = parse_filepath(argc, argv);
+int main() {
     
     /* create an array of MAX_SIZE elements */
     int array[MAX_SIZE];
     
     /* parse the file to fill the array and obtain the actual length */
-    unsigned int length = array_from_file(array, MAX_SIZE, filepath);
+    unsigned int length = array_from_stdin(array, MAX_SIZE);
     
     /*dumping the array*/
     array_dump(array, length);
