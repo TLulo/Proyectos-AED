@@ -36,17 +36,24 @@ unsigned int array_from_stdin(int array[],
     while (tam < 0){
         printf("Ingrese el tamano del arreglo(valor positivo): ");
     } 
-    fscanf(archivo,"%ud", &max_size);
+    fscanf(archivo,"%u", &max_size);
+    printf("Ingrese los elementos del arreglo:\n");
     for(unsigned int i = 0;i< max_size;i++){
-        printf("Ingrese el valor del arreglo en la posicion %d:",i);
         fscanf(archivo,"%d",&array[i]);
     }
+    // unsigned int i = 0;
+    // while (i < max_size && array[i]=0)
+    // {
+    //     printf("Ingrese el valor del arreglo en la posicion %d:",i);
+    //      fscanf(archivo,"%d",&array[i]);
+    // }
+    
     //edicion del estudiante
     return max_size;
 }
 
 void array_dump(int a[], unsigned int length) {
-    printf("[");
+    printf("\n[");
     for(unsigned int i = 0; i < length;i++){
         printf("%d, ",a[i]);
     }
