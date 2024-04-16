@@ -3,6 +3,35 @@
 
 #define MAX_SIZE 1000
 
+void print_help(char *program_name) {
+    /* Print the usage help of this program. */
+    printf("Usage: %s <input file path>\n\n"
+           "Sort an array given in a file in disk.\n"
+           "\n"
+           "The input file must have the following format:\n"
+           " * Each line must contain the name of a player"
+           " without spaces followed by a three-letter country"
+           " code, the rank of the player, his age, his atp points"
+           " and the number of tournaments played during the year.\n"
+           " * Values must be separated by one or more spaces.\n"
+           " * Numeric values must be natural numbers.\n\n",
+           program_name);
+}
+
+char *parse_filepath(int argc, char *argv[]) {
+    /* Parse the filepath given by command line argument. */
+    char *result = NULL;
+
+    if (argc < 2) {
+        print_help(argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    result = argv[1];
+
+    return (result);
+}
+
 static void dump(char a[], unsigned int length)
 {
     printf("\"");
@@ -14,12 +43,6 @@ static void dump(char a[], unsigned int length)
     printf("\n\n");
 }
 
-// REVISO QUE CADA CARACTER SEA EL QUE DEBERIA
-static void err()
-{
-    printf("Error formato no valido");
-}
-
 unsigned int data_from_file(const char *path,
                             unsigned int indexes[],
                             char letters[],
@@ -28,121 +51,31 @@ unsigned int data_from_file(const char *path,
     unsigned int i = 0;
     FILE *file;
     file = fopen(path, "r");
-    char temp;
+    char temp1,tmp2,tmp3,tmp4,tmp5,tmp6;
 
     while (!feof(file) && i < max_size)
     {
         if (fscanf(file, "%u", &indexes[i]) != -1)
         {
-            if (indexes[i] >= max_size)
+            if (indexes[i] <= MAX_SIZE)
             {
-                i = max_size + 1;
-                break;
-            }
-            else if (fscanf(file, "%c", &temp) && temp == ' ')
-            {
-                if (fscanf(file, "%c", &temp) && temp == '-')
+                int min = fscanf(file, "%c" "%c" "%c" "%c" "%c" "%c" "%c", &temp1, &tmp2, &tmp3, &tmp4 , &tmp5 , &letters[i], &tmp6);
+                if (min == 7 && temp1 == ' ' && tmp2 == '-' && tmp3 == '>' && tmp4 == ' ' && tmp5 == '*' && tmp6 == '*')
                 {
-                    if (fscanf(file, "%c", &temp) && temp == '>')
-                    {
-                        if (fscanf(file, "%c", &temp) && temp == ' ')
-                        {
-                            if (fscanf(file, "%c", &temp) && temp == '*')
-                            {
-                                if (fscanf(file, "%c", &letters[i]))
-                                {
-                                    i++;
-                                    if (fscanf(file, "%c", &temp) && temp != '*')
-                                    {
-                                        i = 0;
-                                        err();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    err();
-                                    i = 0;
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                err();
-                                i = 0;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            err();
-                            i = 0;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        err();
-                        i = 0;
-                        break;
-                    }
-                }
-                else
-                {
-                    err();
-                    i = 0;
+                    i++;
+                }else{
+                    printf("Error formato no valido");
                     break;
                 }
-            }
-            else
-            {
-                err();
-                i = 0;
+            }else{
+                i = MAX_SIZE + 1;
                 break;
-            }
+            }  
         }
     }
     fclose(file);
     return i;
 }
-
-////FUNCIONA PERO ES MI FORMA NO REVISA C/CASO
-// unsigned int data_from_file(const char *path,
-//                             unsigned int indexes[],
-//                             char letters[],
-//                             unsigned int max_size)
-// {
-//     unsigned int i = 0;
-//     FILE *file;
-//     file = fopen(path, "r");
-//     char temp;
-//     while (!feof(file) && i <max_size)
-//     {
-//         if(fscanf(file, "%u", &indexes[i]) != -1 ){
-//             if (indexes[i] > max_size)
-//             {
-//                 return max_size+1;
-//                 break;
-//             }
-//         }
-
-//         for (unsigned int j = 0; j < 8; j++)
-//         {
-//             fscanf(file, "%c", &temp);
-
-//             if (temp == '*')
-//             {
-//                 fscanf(file, "%c", &letters[i]);
-//                 i++;
-//                 fscanf(file, "%c", &temp);
-//                 break;
-//             }
-//         }
-
-//     }
-//     return (i-1);
-//     fclose(file);
-// }
 
 static void rebuild(unsigned int indexes[],
                     char letters[],
@@ -156,29 +89,30 @@ static void rebuild(unsigned int indexes[],
 
 int main(int argc, char *argv[])
 {
-    if (argc == 2)
+    char *filepath = NULL;
+    /* parse the filepath given in command line arguments */
+    filepath = parse_filepath(argc, argv);
+    
+    unsigned int indexes[MAX_SIZE];
+    char letters[MAX_SIZE];
+    char sorted[MAX_SIZE];
+    unsigned int length = 0;
+    //  .----------^
+    //  :
+    // Debe guardarse aqui la cantidad de elementos leidos del archivo
+
+    length = data_from_file(filepath, indexes, letters, MAX_SIZE);
+    if (length > MAX_SIZE)
     {
+        printf("Error el archivo tiene demasiados elementos\n");
+        return EXIT_FAILURE;
+    }
+    else
+    {
+        rebuild(indexes, letters, length, sorted);
 
-        unsigned int indexes[MAX_SIZE];
-        char letters[MAX_SIZE];
-        char sorted[MAX_SIZE];
-        unsigned int length = 0;
-        //  .----------^
-        //  :
-        // Debe guardarse aqui la cantidad de elementos leidos del archivo
+        dump(sorted, length);
 
-        length = data_from_file(argv[1], indexes, letters, MAX_SIZE);
-        if (length > MAX_SIZE)
-        {
-            printf("Error el archivo tiene demasiados elementos\n");
-        }
-        else
-        {
-            rebuild(indexes, letters, length, sorted);
-
-            dump(sorted, length);
-
-            return EXIT_SUCCESS;
-        }
+        return EXIT_SUCCESS;
     }
 }

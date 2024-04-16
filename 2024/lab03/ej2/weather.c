@@ -11,14 +11,14 @@ Weather weather_from_file(FILE* file)
 {
     Weather weather;
 
-    int k_average = TMP_MAX+1;
-    int k_max_temp = TMP_MAX+1;
-    int k_min_temp = TMP_MAX+1;
+    int k_average = __INT_MAX__;
+    int k_max_temp = __INT_MAX__;
+    int k_min_temp = __INT_MAX__;
     unsigned int k_pressure = 0u;
     unsigned int k_moisture = 0u;
     unsigned int k_rainfall = 0u;
 
-    int res = fscanf(file, " %d %d %d %u %u %u " ,&k_average,&k_max_temp,&k_min_temp,&k_pressure,&k_moisture,&k_rainfall);
+    int res = fscanf(file, EXPECTED_WEATHER_FILE_FORMAT,&k_average,&k_max_temp,&k_min_temp,&k_pressure,&k_moisture,&k_rainfall);
     if (res != AMOUNT_OF_WEATHER_VARS){
       fprintf(stderr, "Invalid array6.\n");
       exit(EXIT_FAILURE);

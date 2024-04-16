@@ -71,7 +71,8 @@ void array_from_file(WeatherTable array, const char *filepath)
         else
         {
             printf("Error ano, mes o dia invalido.");
-            break;
+            fclose(file);
+            exit(EXIT_FAILURE);
         }
         /* Completar acá: Guardar la medición de clima en el arreglo multidimensional */
     }

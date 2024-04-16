@@ -40,4 +40,24 @@ bool array_is_sorted(player_t atp[], unsigned int length);
 void sort(player_t a[], unsigned int length);
 
 
+/*
+* swap position to two elements in array of player_t
+*/
+void swap(player_t a[], unsigned int i, unsigned int j);
+
+/*
+*Sort array in ranking with insertion sort
+*Insertion sort have 0.03.... seconds delay
+*/
+void insert(player_t a[], unsigned int i);
+void insertion_sort(player_t a[], unsigned int length);
+
+/*
+*Sort array in ranking with quick-sort
+*Insertion sort have 0.0006.... seconds delay
+*/
+unsigned int partition(player_t a[], unsigned int izq, unsigned int der);
+void quick_sort_rec(player_t a[], unsigned int izq, unsigned int der);
+void quick_sort(player_t a[], unsigned int length);
+
 #endif

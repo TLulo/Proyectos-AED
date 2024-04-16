@@ -12,8 +12,9 @@
 #include "player.h"
 
 bool goes_before(player_t x, player_t y){
-    // completar aquí
-    return true;
+    bool its_player;
+    its_player = x.rank <= y.rank;
+    return its_player;
 }
 
 bool array_is_sorted(player_t atp[], unsigned int length) {
@@ -25,6 +26,71 @@ bool array_is_sorted(player_t atp[], unsigned int length) {
 }
 
 void sort(player_t a[], unsigned int length) {
-    // completar aquí
+    quick_sort(a , length);
 }
 
+void swap(player_t a[], unsigned int i, unsigned int j){
+    player_t aux;
+    aux = a[i];
+    a[i] = a[j];
+    a[j] = aux;
+}
+
+//insertion sort (not used default)
+
+void insert(player_t a[], unsigned int i) {
+    while (i > 0 && goes_before(a[i],a[i-1]))
+    {
+        swap(a,i,i-1);
+        i--;
+    }
+}
+
+void insertion_sort(player_t a[], unsigned int length) {
+    for (unsigned int i = 1u; i < length; ++i) {
+        insert(a, i);
+    }
+}
+
+
+//quicksort (used default)
+unsigned int partition(player_t a[], unsigned int izq, unsigned int der) {
+    unsigned int ppiv = izq;
+    unsigned int i = izq+1;
+    unsigned j = der;
+    while (i <= j)
+    {
+        if (goes_before(a[i],a[ppiv]))
+        {
+            i++;
+        }
+        else if (goes_before(a[ppiv],a[j]))
+        {
+            j--;
+        }
+        else if (goes_before(a[ppiv],a[i]) && goes_before(a[j],a[ppiv]))
+        {
+            swap(a, i, j);
+            i++;
+            j--;
+        }
+    }
+    swap(a,j,ppiv);
+    return j;
+}
+
+void quick_sort_rec(player_t a[], unsigned int izq, unsigned int der) {
+    unsigned int ppiv = partition(a, izq, der);
+    if (der > ppiv)
+    {
+        quick_sort_rec(a, ppiv + 1, der);
+    }
+    if (ppiv > izq)
+    {
+        quick_sort_rec(a, izq, ppiv - 1);
+    }
+}
+
+void quick_sort(player_t a[], unsigned int length) {
+    quick_sort_rec(a, 0u, (length == 0u) ? 0u : length - 1u);
+}
