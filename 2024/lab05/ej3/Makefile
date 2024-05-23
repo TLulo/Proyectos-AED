@@ -1,26 +1,18 @@
-CFLAGS = -Wall -Werror -Wextra -std=c99
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -g
+SOURCES = stack.c test.c
+OBJECTS = $(SOURCES:.c=.o)
+TARGET = test
 
-ARG = *.c
-OBJ = $(ARG:.c=.o)
+.PHONY: clean
 
-TEMPS = $(OBJ) main
+all: $(TARGET)
 
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(LFLAGS) $(LIBS)
 
-
-compile_obj:$(ARG)
-		$(CC) $(CFLAGS) -c $(ARG)
-
-compile_wobj:$(ARG)
-			$(CC) $(CFLAGS) -o main $(OBJ)
-
-debug:$(ARG)
-		$(CC) $(CFLAGS) -c -g $(ARG)
-		$(CC) $(CFLAGS) -g -o main $(OBJ)
-
-memoryleaks:
-			valgrind --leak-check=full ./main
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		rm -f $(TEMPS)
-.PHONY: clean 
+	$(RM) $(OBJECTS) $(TARGET)

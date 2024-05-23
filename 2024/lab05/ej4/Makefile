@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -g
-SOURCES = stack.c test.c
+SOURCES = stack.c hanoi.c main.c
 OBJECTS = $(SOURCES:.c=.o)
-TARGET = stack
+TARGET = solve-hanoi
 
 .PHONY: clean
 

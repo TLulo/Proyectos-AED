@@ -1,23 +1,18 @@
-CFLAGS = -Wall -Werror -Wextra -std=c99
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -g
+SOURCES = main.c strfuncs.c
+OBJECTS = $(SOURCES:.c=.o)
+TARGET = main
 
-ARG = *.c
-OBJ = $(ARG:.c=.o)
+.PHONY: clean
 
-TEMPS = $(OBJ) main
+all: $(TARGET)
 
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(LFLAGS) $(LIBS)
 
-
-compile:$(ARG)
-		$(CC) $(CFLAGS) -c *.c
-
-compile_obj:$(ARG)
-			$(CC) $(CFLAGS) -o main *.o
-
-compile_g:$(ARG)
-		$(CC) $(CFLAGS) -c -g *.c
-		$(CC) $(CFLAGS) -g -o main *.o
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		rm -f $(TEMPS)
-.PHONY: clean 
+	$(RM) $(OBJECTS) $(TARGET)

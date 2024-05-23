@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -g
-SOURCES = stack.c test.c
+SOURCES = queue.c queue_helpers.c main.c
 OBJECTS = $(SOURCES:.c=.o)
-TARGET = stack
+TARGET = queue
 
 .PHONY: clean
 

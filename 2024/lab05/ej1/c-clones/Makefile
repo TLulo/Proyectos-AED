@@ -1,21 +1,19 @@
 CFLAGS = -Wall -Werror -Wextra -std=c99
 CC = gcc
-ARG = clone_ptr.c
-OBJ = $(ARG:.c=.o)
-
-TEMPS = $(OBJ) main
 
 
+TEMPS = main main_ptr clone_ptr.o clone.o
 
-compile:$(ARG)
-		$(CC) $(CFLAGS) -c $(ARG)
 
-compile_obj:$(ARG)
-			$(CC) $(CFLAGS) -o main $(OBJ)
 
-debug:$(ARG)
-		$(CC) $(CFLAGS) -c -g $(ARG)
-		$(CC) $(CFLAGS) -g -o main $(OBJ)
+compile_Noptr:$(ARG) #compile clone.c
+		$(CC) $(CFLAGS) -c clone.c
+		$(CC) $(CFLAGS) -o main clone.o
+
+compile_ptr:$(ARG) #compile clone_ptr.c
+			$(CC) $(CFLAGS) -c clone_ptr.c
+			$(CC) $(CFLAGS) -o main_ptr clone_ptr.o
+
 
 memoryleaks:
 			valgrind --leak-check=full ./main
